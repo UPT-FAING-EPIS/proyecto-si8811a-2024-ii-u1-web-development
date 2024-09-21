@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'CompactBlack';
+    src: url('./src/assets/fonts/CompactBlack.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+

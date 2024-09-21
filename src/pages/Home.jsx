@@ -1,95 +1,92 @@
-import { useEffect, useState } from 'react'
-import { facultades } from '../constants/facultades'
-import EventCard from '../components/EventCard'
-import DefaultLayout from '../components/layouts/DefaultLayout'
-import Header from '../components/Header'
-import { useEventStore } from '../hooks/useEventStore'
-
+import { Link } from 'react-router-dom'
+import '../../src/background.css'
+import CountdownTimer from '../components/CountdownTimer';
 const Home = () => {
-  const [filteredEvents, setFilteredEvents] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [selectedFacultad, setSelectedFacultad] = useState('Todas')
-  const { events, startLoadingEvents } = useEventStore()
-
-  useEffect(() => {
-    const loadEvents = async () => {
-      try {
-        await startLoadingEvents()
-        setFilteredEvents(events)
-      } catch (err) {
-        console.error(err)
-        setError('No se pudieron cargar los eventos')
-      } finally {
-        setLoading(false)
-      }
-    }
-    loadEvents()
-  }, [events])
-
-  useEffect(() => {
-    filterEvents()
-  }, [selectedFacultad, events])
-
-  const filterEvents = () => {
-    let filtered = events
-
-    if (selectedFacultad !== 'Todas') {
-      filtered = filtered.filter((event) => event.facultad === selectedFacultad)
-    }
-
-    setFilteredEvents(filtered)
-  }
-
-  if (error) return <p className='text-center text-red-600 text-lg'>{error}</p>
-
+  const targetDate = new Date("2024-09-24T00:00:00"); 
   return (
-    <DefaultLayout>
-      <Header />
-      <main id='events' className='flex-grow py-16 px-6'>
-        <div className='container mx-auto max-w-screen-xl'>
-          <h2 className='text-4xl font-semibold text-center mb-12'>
-            Eventos Destacados
-          </h2>
+    <div className="background relative flex flex-col items-center justify-center min-h-screen " >
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  
+    <div className="absolute top-4 left-4 flex items-center space-x-2 px-12">
+     <div className='flex items-center'>
+     <div className="p-2 rounded">
+        <img src="https://seeklogo.com/images/U/universidad-privada-de-tacna-logo-3E1EE39EEA-seeklogo.com.png" alt="Logo Juegos Florales" className="h-16 w-16 bg-transparent rounded-xl bg-white p-1" />
+      </div>
+      <div>
+        <h3 className="text-white text-lg font-bold">Juegos Florales 2024</h3>
+      </div>  
+     </div>
+   
+    </div>
+    <div className="absolute top-4 right-4 flex items-center space-x-4 m-10 ">
+      <div>
+        <Link to="/about" className="text-white text-2xl font-semibold hover:underline transition duration-300">Acerca de</Link>
+      </div>
+      <div>
+        <Link to="/eventos" className="text-white text-2xl font-semibold hover:underline transition duration-300">Eventos</Link>
+      </div>
+      <div>
+        <Link to="/equipos" className="text-white text-2xl font-semibold hover:underline transition duration-300">Equipos</Link>
+      </div>
+      <div>
+        <Link to="/lugares" className="text-white text-2xl font-semibold hover:underline transition duration-300">Lugares</Link>
+      </div>
+    </div>
 
-          <div className='mb-8'>
-            <label htmlFor='facultad' className='mr-4'>
-              Filtrar por Facultad:
-            </label>
-            <select
-              id='facultad'
-              className='border p-2 rounded'
-              value={selectedFacultad}
-              onChange={(e) => setSelectedFacultad(e.target.value)}
-            >
-              {facultades.map((facultad) => (
-                <option key={facultad.abreviatura} value={facultad.abreviatura}>
-                  {facultad.nombre}
-                </option>
-              ))}
-            </select>
-          </div>
+    <div className="text-center">
+      <h1 className="font-compact-black text-8xl font-bold text-white uppercase tracking-widest">
+        Juegos Florales
+      </h1>
+      <p className="text-yellow-300 text-2xl mt-4">
+        Universidad Privada de Tacna
+      </p>
+      <p className=" text-white text-lg mt-2">Creatividad y Talento</p>
+    </div>
 
-          {filteredEvents.length === 0 ? (
-            loading ? (
-              <p className='text-center text-gray-700 text-lg'>
-                Cargando eventos...
-              </p>
-            ) : (
-              <p className='text-center text-gray-700 text-lg'>
-                No hay eventos disponibles en este momento.
-              </p>
-            )
-          ) : (
-            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-12'>
-              {filteredEvents.map((event) => (
-                <EventCard key={event.id} event={event} />
-              ))}
-            </div>
-          )}
-        </div>
-      </main>
-    </DefaultLayout>
+    <div className="flex space-x-6 mt-8">
+
+      <Link to="/eventos" className="bg-white text-black px-6 py-3 rounded-full text-xl font-semibold shadow-lg hover:bg-gray-200 transition duration-300">   Enterate de los Eventos</Link>
+      <Link to="/lugares" className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-full text-xl font-semibold hover:bg-white hover:text-black transition duration-300">
+         Conoce las Ubicaciones
+      </Link>
+
+    </div>
+    <div className='py-14'>
+      <CountdownTimer targetDate={targetDate} />
+    </div>
+    <div className="absolute bottom-8 left-4 text-white px-12">
+      <p className="text-3xl font-semibold">¿Cuándo?</p>
+      <p className="text-2xl">24 de Setiembre 2024</p>
+    </div>
+    <div className="absolute bottom-7 right-1 text-white flex flex-col items-center text-center px-12">
+     <div> <p className="text-3xl font-semibold">Conoce más:</p></div>
+    <div>  <a 
+        href="https://www.facebook.com/ObunUPT/" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="text-2xl underline hover:text-yellow-300 transition duration-300"
+      >
+        Bienestar Universitario UPT
+      </a></div>
+    </div>
+  </div>
   )
 }
 

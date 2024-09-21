@@ -1,13 +1,12 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { useAuthStore } from '../hooks/useAuthStore'
 import { useEffect } from 'react'
-import Login from '../pages/Login'
-import Eventos from '../pages/Eventos'
-import Equipos from '../pages/Equipos'
-import Participantes from '../pages/Participantes'
-import Home from '../pages/Home'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { useAuthStore } from '../hooks/useAuthStore'
 import About from '../pages/About'
+import Equipos from '../pages/Equipos'
+import Eventos from '../pages/Eventos'
+import Home from '../pages/Home'
 import Lugares from '../pages/Lugares'
+import Participantes from '../pages/Participantes'
 
 function AppRouter() {
   const { status, checkAuthToken } = useAuthStore()
@@ -22,13 +21,6 @@ function AppRouter() {
 
   return (
     <Routes>
-      {status === 'not-authenticated' ? (
-        <>
-          <Route path='/auth/*' element={<Login />} />
-          <Route path='/*' element={<Navigate to='/auth/login' />} />
-        </>
-      ) : (
-        <>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/eventos' element={<Eventos />} />
@@ -36,8 +28,6 @@ function AppRouter() {
           <Route path='/participantes' element={<Participantes />} />
           <Route path='/lugares' element={<Lugares />} />
           <Route path='/*' element={<Navigate to='/' />} />
-        </>
-      )}
     </Routes>
   )
 }

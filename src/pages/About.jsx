@@ -3,9 +3,10 @@ import DefaultLayout from '../components/layouts/DefaultLayout'
 const About = () => {
   return (
     <DefaultLayout>
-      <div>About</div>
+      asdsad
     </DefaultLayout>
-  )
-}
+    
+  );
+};
 
-export default About
+export default About;
